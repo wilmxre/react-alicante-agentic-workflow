@@ -1,4 +1,3 @@
-import { Badge } from "@/components/atoms/badge";
 import { SurfaceCard } from "@/components/atoms/surface-card";
 import { Link } from "@/i18n/navigation";
 import type { Session } from "@/types/session";
@@ -20,12 +19,11 @@ export function SessionBlock({ session, top, height }: SessionBlockProps) {
         height={`${height}px`}
       >
         <SurfaceCard>
-          <Badge variant="secondary">{session.level}</Badge>
           <Text fontWeight="medium" color="var(--text-primary)" truncate>
             {session.title}
           </Text>
           <Text color="var(--text-muted)" truncate>
-            {session.startTime} · {session.speaker}
+            {session.startTime} · {session.speaker} · {session.level}
           </Text>
         </SurfaceCard>
       </Box>
