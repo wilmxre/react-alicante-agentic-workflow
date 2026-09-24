@@ -6,7 +6,7 @@ import {
 } from "@/components/atoms/card";
 import { Link } from "@/i18n/navigation";
 import type { SpeakerSessions } from "@/utils/speaker-sessions";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, List, Text } from "@chakra-ui/react";
 
 interface SpeakerCardProps {
   speakerSessions: SpeakerSessions;
@@ -18,23 +18,41 @@ export function SpeakerCard({ speakerSessions }: SpeakerCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{speaker}</CardTitle>
+        <CardTitle as="h2">{speaker}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Flex direction="column" gap="2">
+        <List.Root
+          role="list"
+          listStyle="none"
+          display="flex"
+          direction="column"
+          gap="2"
+        >
           {sessions.map((session) => (
-            <Link key={session.id} href={`/sessions/${session.id}`}>
-              <Flex justify="space-between" gap="3">
-                <Text truncate color="var(--text-primary)">
-                  {session.title}
-                </Text>
-                <Text color="var(--text-muted)" flexShrink="0">
-                  {session.startTime}
-                </Text>
-              </Flex>
-            </Link>
+            <List.Item key={session.id}>
+              <Link href={`/sessions/${session.id}`}>
+                <Flex justify="space-between" gap="3" paddingY="1">
+                  <Text
+                    truncate
+                    color="var(--text-primary)"
+                    title={session.title}
+                  >
+                    {session.title}
+                  </Text>
+                  <time
+                    dateTime={session.startTime}
+                    style={{
+                      color: "var(--text-secondary)",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {session.startTime}
+                  </time>
+                </Flex>
+              </Link>
+            </List.Item>
           ))}
-        </Flex>
+        </List.Root>
       </CardContent>
     </Card>
   );
