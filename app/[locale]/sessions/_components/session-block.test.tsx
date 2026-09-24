@@ -33,4 +33,10 @@ describe("SessionBlock", () => {
       "/en/sessions/opening-keynote",
     );
   });
+
+  it("shows the session's level", () => {
+    render(<SessionBlock session={session} top={0} height={72} />);
+
+    expect(screen.getByText("beginner")).toBeInTheDocument();
+  });
 });
